@@ -618,6 +618,27 @@ jobs:
           echo "GLIDE_RUNTIME_AGENT_READY=true"
 
       - name: Launch Minecraft client
+        env:
+          PYTHONBUFFERED: "1"
+          GLIDE_MINECRAFT_VERSION: "${{ inputs.minecraft_version }}"
+          GLIDE_MINECRAFT_XMX: "${{ inputs.xmx_gb }}G"
+          GLIDE_MINECRAFT_LOADER: "${{ inputs.loader }}"
+          GLIDE_RESOLUTION_PRESET: "${{ inputs.render_preset }}"
+          GLIDE_RENDER_WIDTH: "${{ inputs.render_width }}"
+          GLIDE_RENDER_HEIGHT: "${{ inputs.render_height }}"
+          GLIDE_AUTH_MODE: "${{ inputs.auth_mode }}"
+          GLIDE_OFFLINE_USERNAME: "${{ inputs.offline_username }}"
+          GLIDE_SKIN_MODEL: "${{ inputs.skin_model }}"
+          GLIDE_XDG_RUNTIME_DIR: "/tmp/glide-runtime"
+          GLIDE_PULSE_RUNTIME_PATH: "${GLIDE_XDG_RUNTIME_DIR}/pulse"
+          GLIDE_PULSE_SERVER: "unix:${GLIDE_PULSE_RUNTIME_PATH}/native"
+          GLIDE_PULSE_LATENCY_MSEC: "60"
+          GLIDE_PULSE_SUSPEND_ON_IDLE: "no"
+          GLIDE_PULSE_SINK: "glide_game_sink"
+          GLIDE_PULSE_SOURCE: "glide_game_sink.monitor"
+          SDL_AUDIODRIVER: "pulseaudio"
+          AUDIODRIVER: "pulseaudio"
+          ALSOFT_DRIVERS: "pulse"
         shell: bash
         run: |
           set -euo pipefail

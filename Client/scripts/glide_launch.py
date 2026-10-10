@@ -4,7 +4,9 @@ import shutil
 import subprocess
 import zipfile
 import minecraft_launcher_lib
+import sys
 
+sys.stdout.reconfigure(line_buffering=True)
 
 def microsoft_device_login(client_id):
     """Authenticate a Microsoft account using device code and Minecraft/Xbox services."""
